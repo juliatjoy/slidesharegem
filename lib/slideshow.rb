@@ -3,14 +3,14 @@ require 'nokogiri'
 module SlideShare
   class SlideShow
     attr_accessor :xml_response,
-                    :id, :title, :description, :status,
+                    :id, :title, :stripped_title, :description, :status,
                     :created_at, :updated_at,
                     :username,
                     :url,
                     :language, :format, :type,
-                    :downloadable, :in_contest,
+                    :downloadable, :in_contest, :ppt_location
                     :tags,
-                    :slide_count, :favorite_count,
+                    :slide_count, :favorite_count, :download_coun, :view_count, :comment_count
                     :is_visible_by_contacts
 
     def initialize xml_response = nil
@@ -23,6 +23,7 @@ module SlideShare
     def parse_response
       @id = xml_response_integer('ID')
       @title = xml_response_text('Title')
+      @stripped_title = xml_response_text('StrippedTitle')
       @description = xml_response_text('Description')
       @status = xml_response_status
       @username = xml_response_text('Username')
@@ -30,6 +31,7 @@ module SlideShare
       @created_at = Time.parse xml_response_text('Created') rescue nil
       @updated_at = Time.parse xml_response_text('Updated') rescue nil
       @language = xml_response_text('Language')
+      @ppt_location = xml_response_text('PPTLocation')
       @format = xml_response_text('Format')
       @downloadable = xml_response_boolean('Download')
       @type = xml_response_type
@@ -37,6 +39,9 @@ module SlideShare
       @tags = xml_response_text_array('Tag')
       @slide_count = xml_response_integer('NumSlides')
       @favorite_count = xml_response_integer('NumFavorites')
+      @download_count = xml_response_integer('NumDownloads')
+      @view_count = xml_response_integer('NumViews')
+      @comment_count = xml_response_integer('NumComments')
       @is_visible_by_contacts = xml_response_boolean('ShareWithContacts')
     end
 
