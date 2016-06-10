@@ -10,7 +10,7 @@ module SlideShare
                     :language, :format, :type,
                     :downloadable, :in_contest,
                     :tags,
-                    :slide_count,
+                    :slide_count, :favorite_count,
                     :is_visible_by_contacts
 
     def initialize xml_response = nil
@@ -36,6 +36,7 @@ module SlideShare
       @in_contest = xml_response_boolean('InContest')
       @tags = xml_response_text_array('Tag')
       @slide_count = xml_response_integer('NumSlides')
+      @favorite_count = xml_response_integer('NumFavorites')
       @is_visible_by_contacts = xml_response_boolean('ShareWithContacts')
     end
 
