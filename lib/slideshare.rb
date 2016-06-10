@@ -36,7 +36,7 @@ module SlideShare
     end
 
     def user_contacts params
-      get('get_user_contacta', params)
+      get('get_user_contacts', params)
     end
 
     def user_tags params
