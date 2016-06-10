@@ -27,8 +27,8 @@ module SlideShare
       @status = xml_response_status
       @username = xml_response_text('Username')
       @url = xml_response_text('URL')
-      @created_at = Time.parse xml_response_text('Created')
-      @updated_at = Time.parse xml_response_text('Updated')
+      @created_at = Time.parse xml_response_text('Created') rescue nil
+      @updated_at = Time.parse xml_response_text('Updated') rescue nil
       @language = xml_response_text('Language')
       @format = xml_response_text('Format')
       @downloadable = xml_response_boolean('Download')
